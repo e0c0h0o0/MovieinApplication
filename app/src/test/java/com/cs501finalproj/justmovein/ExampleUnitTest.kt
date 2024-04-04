@@ -1,4 +1,4 @@
-package com.example.chatapplication
+package com.cs501finalproj.justmovein
 
 import org.junit.Test
 

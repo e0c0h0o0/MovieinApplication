@@ -1,14 +1,15 @@
 plugins {
-    alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.gms.google-services")
+    id("com.android.application")
 }
 
 android {
-    namespace = "com.example.chatapplication"
+    namespace = "com.cs501finalproj.justmovein"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.chatapplication"
+        applicationId = "com.cs501finalproj.justmovein"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -36,12 +37,15 @@ android {
 }
 
 dependencies {
-
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+    implementation("com.google.firebase:firebase-analytics")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

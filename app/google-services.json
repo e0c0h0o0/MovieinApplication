@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "285827588107",
+    "project_id": "justmovein-53863",
+    "storage_bucket": "justmovein-53863.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285827588107:android:a6ea3c5c6215f67ad8270e",
+        "android_client_info": {
+          "package_name": "com.cs501finalproj.justmovein"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLMWyjelxi4XMNyQS4vtoeInKo8t5vV3E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

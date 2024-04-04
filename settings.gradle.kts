@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ChatApplication"
+rootProject.name = "JustMovein"
 include(":app")
+ 
