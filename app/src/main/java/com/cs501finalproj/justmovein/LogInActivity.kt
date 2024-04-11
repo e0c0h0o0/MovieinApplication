@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,11 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 
 import com.google.firebase.auth.FirebaseAuth
 
-class    LogIn : AppCompatActivity() {
+class    LogInActivity : AppCompatActivity() {
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var btnLogIn: Button
-    private lateinit var btnSignUp: Button
+    private lateinit var txtSignUp: TextView
     private lateinit var mAuth:FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,9 +30,9 @@ class    LogIn : AppCompatActivity() {
         edtEmail = findViewById(R.id.edt_email)
         edtPassword = findViewById(R.id.edtPassword)
         btnLogIn= findViewById(R.id.btnLogin)
-        btnSignUp = findViewById(R.id.btnSignUp)
-        btnSignUp.setOnClickListener{
-             val intent = Intent(this,SignUp::class.java)
+        txtSignUp = findViewById(R.id.btnSignUp)
+        txtSignUp.setOnClickListener{
+             val intent = Intent(this,SignUpActivity::class.java)
             startActivity(intent)
         }
         btnLogIn.setOnClickListener{
@@ -50,11 +51,11 @@ class    LogIn : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                    //code for logging in user
-                    val  intent = Intent(this@LogIn, MainActivity::class.java)
+                    val  intent = Intent(this@LogInActivity, MainActivity::class.java)
 //                    finish()
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this@LogIn,"User is not exist",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LogInActivity,"User is not exist",Toast.LENGTH_LONG).show()
                 }
             }
 
