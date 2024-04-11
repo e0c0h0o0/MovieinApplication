@@ -3,6 +3,7 @@ package com.cs501finalproj.justmovein
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -54,7 +55,8 @@ class SignUp : AppCompatActivity() {
                     startActivity(intent)
 
                 } else {
-                    Toast.makeText(this@SignUp,"Error occurred",Toast.LENGTH_LONG).show()
+                    Log.e("SignUpError", "Sign-up failed", task.exception)
+                    Toast.makeText(baseContext, "Sign-up failed: ${task.exception?.localizedMessage}", Toast.LENGTH_LONG).show()
                 }
             }
     }
