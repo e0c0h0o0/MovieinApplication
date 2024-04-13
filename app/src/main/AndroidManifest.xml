@@ -12,9 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JustMovein"
         tools:targetApi="31">
-        <activity android:name=".User"/>
-        <activity android:name=".SignUp"/>
-        <activity android:name=".LogIn"
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/Theme.JustMovein" />
+        <activity android:name=".User" />
+        <activity android:name=".SignUp" />
+        <activity
+            android:name=".LogIn"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +30,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>
