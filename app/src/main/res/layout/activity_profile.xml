@@ -41,15 +41,7 @@
         android:inputType="textEmailAddress"
        />
 
-    <TextView
-        android:id="@+id/profile_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:inputType="textEmailAddress"
-        />
+
 
 
 </LinearLayout>
