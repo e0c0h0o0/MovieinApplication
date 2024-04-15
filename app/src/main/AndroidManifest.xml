@@ -15,6 +15,7 @@
         <activity android:name=".User"/>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".LogInActivity" />
+        <activity android:name=".ListItemActivity" />
         <activity android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>

@@ -1,4 +1,29 @@
 <resources>
     <string name="app_name">JustMovein</string>
     <string name="placeholder">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been </string>
+
+    <string name="add_up_to_5">Add up to 5 photos</string>
+    <string name="description_title">Description</string>
+    <string name="detail_title">Details</string>
+    <string name="price_title">Pricing</string>
+    <string name="item_title_hint">Title</string>
+    <string name="item_description_hint">Description</string>
+
+    <string-array name="category_array">
+        <item>Select category...</item>
+        <item>Books</item>
+        <item>Electronics</item>
+        <item>Clothing</item>
+    </string-array>
+
+    <string-array name="condition_array">
+        <item>Select condition...</item>
+        <item>New</item>
+        <item>Like New</item>
+        <item>Good</item>
+        <item>Fair</item>
+        <item>Poor</item>
+    </string-array>
+
+
 </resources>
