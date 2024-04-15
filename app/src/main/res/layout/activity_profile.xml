@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context=".ProfileActivity">
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/icon_account_circle"
+        android:id="@+id/profile_pic"/>
+    <ProgressBar
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:id="@+id/progress_bar"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profile_username"
+        tools:text="username"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:textSize="14sp"
+        tools:text="Logout"
+        android:id="@+id/profile_btn"/>
+    <TextView
+        android:id="@+id/profile_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:inputType="textEmailAddress"
+       />
+
+    <TextView
+        android:id="@+id/profile_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:inputType="textEmailAddress"
+        />
+
+
+</LinearLayout>
