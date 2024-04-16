@@ -5,7 +5,7 @@
 and purchasing furniture facilities. So we designed JustMovein, which is an app that combines rental housing and
 second-hand purchase for both buying and selling. Make it easy for users to move in.*
 
-<img src="Docs/Screenshots/welcome_page.png" alt="welcomePage">
+<img src="Docs/Screenshots/welcome_page.png" alt="welcomePage" width="270" height="570">
 
 
 ## Compile Instructions
