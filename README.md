@@ -5,8 +5,9 @@
 and purchasing furniture facilities. So we designed JustMovein, which is an app that combines rental housing and
 second-hand purchase for both buying and selling. Make it easy for users to move in.*
 
-<img src="Docs/Screenshots/welcome_page.png" alt="welcomePage" width="270" height="570">
-
+<p align="center">
+  <img src="Docs/Screenshots/welcome_page.png" alt="welcomePage" width="270" height="570">
+</p>
 
 ## Compile Instructions
 Please use `Get from VCS` in Android Studio, and enter https://github.com/e0c0h0o0/MovieinApplication.git as the URL to import the project.
