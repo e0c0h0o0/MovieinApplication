@@ -2,6 +2,7 @@ package com.cs501finalproj.justmovein
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +63,7 @@ class TradeMainFragment : Fragment() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     when (tab?.position) {
                         0 -> fetchItemsFromDatabase("Browse")
-                        1 -> fetchItemsFromDatabase("Recently Viewed")
+                        1 -> fetchItemsFromDatabase("Liked")
                     }
                 }
 
@@ -89,26 +90,25 @@ class TradeMainFragment : Fragment() {
             return
         }
 
-        // Always fetch active items but filter based on the tab after data is fetched
         val query = databaseReference.orderByChild("active").equalTo(true)
-
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val fetchedItems = mutableListOf<Item>()
-                for (childSnapshot in snapshot.children) {
+                snapshot.children.forEach { childSnapshot ->
                     val item = childSnapshot.getValue(Item::class.java)
                     if (item != null && item.active == true) {
                         if (tab == "Liked") {
-                            // Check if the current user's id is a key in the likedBy map
+                            // Log for debugging
+                            Log.d("TradeMainFragment", "Item ${item.id} likedBy: ${item.likedBy}")
                             if (item.likedBy?.containsKey(userId) == true) {
                                 fetchedItems.add(item)
                             }
                         } else if (tab == "Browse") {
-                            // Add all active items for the "Browse" tab
                             fetchedItems.add(item)
                         }
                     }
                 }
+                Log.d("TradeMainFragment", "Fetched ${fetchedItems.size} items for tab $tab")
                 adapter.updateItemList(fetchedItems)
             }
 
