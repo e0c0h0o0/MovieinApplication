@@ -31,7 +31,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding  = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        profileUserId = intent.getStringExtra("profile_user_id")!!
+        profileUserId = intent.getStringExtra("profile_user_id") ?: FirebaseAuth.getInstance().currentUser?.uid ?: throw IllegalStateException("User ID not available")
         currentUserId =  FirebaseAuth.getInstance().currentUser?.uid!!
 
         photoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
@@ -162,12 +162,11 @@ class ProfileActivity : AppCompatActivity() {
     fun setUI(){
         profileUserModel.apply {
             Glide.with(binding.profilePic.context)
-                .load(profilePic) // Assuming you have a profilePic URL or placeholder
+                .load(profilePic ?: R.drawable.icon_account_circle) // Use default if null
                 .into(binding.profilePic)
-            binding.profileUsername.text = name
-            binding.profileEmail.text = email
+            binding.profileUsername.text = name ?: "No Name"
+            binding.profileEmail.text = email ?: "No Email"
         }
-
     }
 
 }

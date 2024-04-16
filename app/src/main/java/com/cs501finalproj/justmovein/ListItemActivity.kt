@@ -94,7 +94,7 @@ class ListItemActivity : AppCompatActivity() {
                     condition = condition,
                     price = price,
                     imageUrl = imageUrl,
-                    isActive = true,
+                    active = true,
                     timestamp = System.currentTimeMillis()
                 )
                 pushItemToFirebase(item)
@@ -141,6 +141,7 @@ class ListItemActivity : AppCompatActivity() {
     private fun pushItemToFirebase(item: Item) {
         val databaseRef = FirebaseDatabase.getInstance().getReference("Items")
         val itemId = databaseRef.push().key  // Generate a unique key for the item
+        item.id = itemId
         if (itemId != null) {
             databaseRef.child(itemId).setValue(item)
                 .addOnCompleteListener { task ->

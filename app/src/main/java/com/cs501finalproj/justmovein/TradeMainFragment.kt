@@ -46,6 +46,7 @@ class TradeMainFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         adapter = ItemAdapter(mutableListOf())
         recyclerView.layoutManager = GridLayoutManager(context, 3)
+        recyclerView.adapter = adapter
 
         fabAddItem = view.findViewById(R.id.fab_add_item)
         fabAddItem.setOnClickListener {
@@ -82,29 +83,30 @@ class TradeMainFragment : Fragment() {
     }
 
     private fun fetchItemsFromDatabase(tab: String) {
-        var query = databaseReference.child("Items").orderByChild("isActive").equalTo(true)
-
-        if (tab == "Liked") {
-            val userId = FirebaseAuth.getInstance().currentUser?.uid  // Get the current user's ID
-            if (userId != null) {
-                query = databaseReference.child("Items").orderByChild("likedBy/$userId").equalTo(true)
-            } else {
-                Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
-                return
-            }
+        val userId = FirebaseAuth.getInstance().currentUser?.uid
+        if (userId == null) {
+            Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        if (tab == "Browse") {
-            query = databaseReference.orderByChild("timestamp")
-        }
+        // Always fetch active items but filter based on the tab after data is fetched
+        val query = databaseReference.orderByChild("active").equalTo(true)
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val fetchedItems = mutableListOf<Item>()
                 for (childSnapshot in snapshot.children) {
                     val item = childSnapshot.getValue(Item::class.java)
-                    if (item != null && item.isActive == true) {  // Ensure items are active
-                        fetchedItems.add(item)
+                    if (item != null && item.active == true) {
+                        if (tab == "Liked") {
+                            // Check if the current user's id is a key in the likedBy map
+                            if (item.likedBy?.containsKey(userId) == true) {
+                                fetchedItems.add(item)
+                            }
+                        } else if (tab == "Browse") {
+                            // Add all active items for the "Browse" tab
+                            fetchedItems.add(item)
+                        }
                     }
                 }
                 adapter.updateItemList(fetchedItems)
