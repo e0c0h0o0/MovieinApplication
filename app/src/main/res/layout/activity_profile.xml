@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".ProfileActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Personal Center"
-            android:layout_centerInParent="true"
-            android:textColor="@color/orange"
-            android:textSize="18sp"/>
+            android:src="@drawable/ic_left"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -22,7 +22,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -56,9 +57,9 @@
                 android:layout_marginTop="20dp"
                 android:paddingStart="30dp"
                 android:layout_gravity="center"
-                android:background="@drawable/btn_background"
+                android:background="@color/button"
                 android:text="Edit Profile"
-                android:textColor="@color/white"
+                android:textColor="@color/text"
                 android:textAllCaps="false"
                 android:paddingEnd="30dp"/>
             <LinearLayout
@@ -85,7 +86,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="Night Mode"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/text"
                         android:layout_toEndOf="@+id/nightmodeIcon"
                         />
                     <androidx.appcompat.widget.SwitchCompat
@@ -113,7 +114,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="Notifications "
-                        android:textColor="@color/orange"
+                        android:textColor="@color/text"
                         android:layout_toEndOf="@+id/notificationIcon"
                         />
                     <androidx.appcompat.widget.SwitchCompat
@@ -141,7 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="Private Account"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/text"
                         android:layout_toEndOf="@+id/private_account_icon"
                         />
                     <androidx.appcompat.widget.SwitchCompat
@@ -177,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="Security &amp;  privacy "
-                        android:textColor="@color/orange"
+                        android:textColor="@color/text"
                         android:layout_toEndOf="@+id/securityicon"
                         />
                     <ImageView
@@ -203,7 +204,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="Language"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/text"
                         android:layout_toEndOf="@+id/languageicon"
                         />
                     <ImageView
@@ -238,7 +239,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:text="Send us message"
-                        android:textColor="@color/orange"
+                        android:textColor="@color/text"
                         android:layout_toEndOf="@+id/messageicon"
                         />
                     <ImageView
@@ -257,8 +258,8 @@
                 tools:text="Logout"
                 android:layout_gravity="center"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:background="@drawable/btn_background"
+                android:textColor="@color/text"
+                android:background="@color/button"
                 android:id="@+id/profile_btn"/>
         </LinearLayout>
     </ScrollView>
