@@ -39,7 +39,7 @@ class TradeMainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.trade_main, container, false)
+        val view = inflater.inflate(R.layout.fragment_trade_main, container, false)
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Items")
 

@@ -1,7 +1,6 @@
 package com.cs501finalproj.justmovein
 
 import android.content.Intent
-import android.media.Image
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,7 +17,7 @@ class ItemDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_detail)
+        setContentView(R.layout.activity_item_detail)
 
         val itemId = intent.getStringExtra("ITEM_ID")
         val titleView: TextView = findViewById(R.id.item_detail_title)
