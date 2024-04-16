@@ -32,20 +32,15 @@ class MainActivity : AppCompatActivity() {
                     switchFragment(fragment)
                 }
                 R.id.navigation_profile -> {
-                    FirebaseAuth.getInstance().currentUser?.let {
-                        val intent = Intent(this, ProfileActivity::class.java)
-                        startActivity(intent)
-                    } ?: run {
-                        Log.d("MainActivity", "Redirecting to login - no user logged in.")
-                        val loginIntent = Intent(this, LogInActivity::class.java)
-                        startActivity(loginIntent)
-                    }
-                    false
+                    val intent = Intent(this,ProfileActivity::class.java)
+                    intent.putExtra("profile_user_id", FirebaseAuth.getInstance().currentUser?.uid )
+                    startActivity(intent)
+                    true
                 }
-                else -> false
             }
             true
         }
+        true
         bottomNav.selectedItemId = R.id.navigation_trading
     }
 

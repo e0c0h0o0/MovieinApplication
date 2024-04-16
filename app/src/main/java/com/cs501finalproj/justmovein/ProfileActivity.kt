@@ -126,7 +126,7 @@ class ProfileActivity : AppCompatActivity() {
     }
     fun logout(){
         FirebaseAuth.getInstance().signOut()
-        val intent = Intent(this,LogIn::class.java)
+        val intent = Intent(this,LogInActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
@@ -163,11 +163,11 @@ class ProfileActivity : AppCompatActivity() {
     fun setUI(){
         profileUserModel.apply {
             Glide.with(binding.profilePic).load(profilePic)
-                .apply(RequestOptions().placeholder(R.drawable.icon_account_circle))
+                .load(profilePic ?: R.drawable.icon_account_circle) // Use default if null
                 .circleCrop()
                 .into(binding.profilePic)
-            binding.profileUsername.text ="@"+ name
-            binding.profileEmail.text = email
+            binding.profileUsername.text = name ?: "No Name"
+            binding.profileEmail.text = email ?: "No Email"
             binding.progressBar.visibility = View.INVISIBLE
 
         }
