@@ -24,6 +24,7 @@ class ListItemActivity : AppCompatActivity() {
     private lateinit var btnList: Button
     private lateinit var imgCamera: ImageView
     private lateinit var itemImg : ImageView
+    private lateinit var exit : ImageView
     private var imageUrl: String? = null
 
     companion object {
@@ -42,6 +43,7 @@ class ListItemActivity : AppCompatActivity() {
         btnList = findViewById(R.id.btnList)
         imgCamera = findViewById(R.id.camera)
         itemImg = findViewById(R.id.item_image_1)
+        exit = findViewById(R.id.cross)
 
         imgCamera.setOnClickListener {
             pickImage()
@@ -49,6 +51,11 @@ class ListItemActivity : AppCompatActivity() {
 
         btnList.setOnClickListener {
             listNewItem()
+        }
+
+        exit.setOnClickListener{
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -79,11 +86,25 @@ class ListItemActivity : AppCompatActivity() {
 
         if (validateInputs(title, description, category, condition, priceText)) {
             val price = priceText.toDoubleOrNull()
-            if (price != null) {
-                val item = Item(title, description, category, condition, price, imageUrl)
+            if (price != null && imageUrl != null) {  // Ensure imageUrl is not null
+                val item = Item(
+                    title = title,
+                    description = description,
+                    category = category,
+                    condition = condition,
+                    price = price,
+                    imageUrl = imageUrl,
+                    isActive = true,
+                    timestamp = System.currentTimeMillis()
+                )
                 pushItemToFirebase(item)
             } else {
-                edtPrice.error = "Invalid price"
+                if (imageUrl == null) {
+                    Toast.makeText(this, "Please wait for the image to finish uploading", Toast.LENGTH_SHORT).show()
+                }
+                if (price == null) {
+                    edtPrice.error = "Invalid price"
+                }
             }
         } else {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -108,7 +129,8 @@ class ListItemActivity : AppCompatActivity() {
         storageRef.putFile(imageUri)
             .addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.metadata?.reference?.downloadUrl?.addOnSuccessListener { uri ->
-                    val imageUrl = uri.toString()
+                    imageUrl = uri.toString()  // Update the imageUrl variable
+                    itemImg.setImageURI(imageUri) // Set the image to the ImageView after upload confirmation
                 }
             }
             .addOnFailureListener {
@@ -124,7 +146,8 @@ class ListItemActivity : AppCompatActivity() {
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "Item listed successfully!", Toast.LENGTH_SHORT).show()
-                        // TODO: Clear the form or navigate the user to another screen
+                        val  intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     } else {
                         Toast.makeText(this, "Failed to list item.", Toast.LENGTH_SHORT).show()
                     }

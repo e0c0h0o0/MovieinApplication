@@ -6,5 +6,8 @@ data class Item(
     val category: String? = null,
     val condition: String? = null,
     val price: Double? = null,
-    val imageUrl: String? = null
+    val imageUrl: String? = null,
+    val isActive: Boolean? = true,
+    val likedBy: Map<String, Boolean>? = null,
+    val timestamp: Long? = null
 )

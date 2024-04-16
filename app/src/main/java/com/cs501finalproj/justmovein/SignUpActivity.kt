@@ -58,7 +58,7 @@ class SignUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // code for  jumping to home
                     mAuth.currentUser?.let { addUserToDatabase(name,email, it.uid) }
-                    val   intent = Intent(this@SignUpActivity, MainActivity::class.java)
+                    val   intent = Intent(this@SignUpActivity, LogInActivity::class.java)
 //                    finish()
                     startActivity(intent)
 
