@@ -132,7 +132,7 @@ class ProfileActivity : AppCompatActivity() {
 
     fun logout(){
         FirebaseAuth.getInstance().signOut()
-        val intent = Intent(this,LogIn::class.java)
+        val intent = Intent(this,LogInActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
