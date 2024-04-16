@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
-<com.google.android.material.bottomnavigation.BottomNavigationView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/bottom_nav_bar"
-    app:menu="@menu/bottom_nav_menu"
-    android:layout_alignParentBottom="true"/>
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="Search..."
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"/>
 
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_bar"
+        android:layout_above="@id/bottom_navigation"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@color/text"
+        app:itemIconSize="35dp"
+        android:background="@color/menu"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemRippleColor="@color/search"
+        android:outlineSpotShadowColor="@color/search"
+        android:outlineAmbientShadowColor="@color/search"
+        app:itemTextColor="@color/text" />
 </RelativeLayout>
