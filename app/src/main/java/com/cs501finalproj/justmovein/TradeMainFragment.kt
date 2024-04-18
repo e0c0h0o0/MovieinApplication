@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,6 +24,7 @@ class TradeMainFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var fabAddItem: FloatingActionButton
+    private lateinit var searchBar: EditText
     private lateinit var tabLayout: TabLayout
     private var itemList: List<Item> = listOf()
     private lateinit var databaseReference: DatabaseReference
@@ -54,6 +56,8 @@ class TradeMainFragment : Fragment() {
             val intent = Intent(activity, ListItemActivity::class.java)
             startActivity(intent)
         }
+
+        searchBar = view.findViewById(R.id.search_bar)
 
         tabLayout = view.findViewById(R.id.tabs)
         tabLayout.apply {

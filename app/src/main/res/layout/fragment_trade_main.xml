@@ -5,6 +5,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background">
 
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:hint="Search..."
+        android:inputType="text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:background="@drawable/rounded_edittext"/>
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
@@ -12,7 +23,8 @@
         android:background="@color/background"
         app:tabTextColor="@color/text"
         app:tabIndicatorColor="@color/text"
-        app:tabRippleColor="@color/search">
+        app:tabRippleColor="@color/search"
+        android:layout_below="@id/search_bar">
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView

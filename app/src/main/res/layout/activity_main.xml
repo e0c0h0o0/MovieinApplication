@@ -7,22 +7,10 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/search_bar"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:hint="Search..."
-        android:inputType="text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:padding="12dp"
-        android:background="@drawable/rounded_edittext"/>
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search_bar"
         android:layout_above="@id/bottom_navigation"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
