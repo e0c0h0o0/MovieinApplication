@@ -20,9 +20,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
         mAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().getReference()
+
+        // Check if the user is already logged in
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            startActivity(Intent(this, WelcomeActivity::class.java))
+            finish()
+        } else {
+            // User is logged in, set the content view to the main layout
+            setContentView(R.layout.activity_main)
+        }
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNav.setOnNavigationItemSelectedListener { item ->

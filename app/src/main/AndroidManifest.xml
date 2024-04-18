@@ -21,13 +21,7 @@
         <activity android:name=".ListItemActivity" />
         <activity android:name=".ItemDetailActivity" />
         <activity android:name=".WelcomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".ProfileActivity"
             android:exported="false"
@@ -35,7 +29,12 @@
             android:theme="@style/Theme.JustMovein" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
