@@ -1,5 +1,5 @@
 # CS 501 Final Project - JustMoveIn
-> **Team**:   Jiayin Fan, Xiangyu Ji, Haixi Zhang<br>
+> **Team**:   Jiayin Fan,Haixi Zhang<br>
 
 *Whether we go to school or work in a new city, we need to solve the problem of renting a house
 and purchasing furniture facilities. So we designed JustMovein, which is an app that combines rental housing and

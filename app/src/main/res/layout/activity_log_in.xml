@@ -53,24 +53,43 @@
         android:layout_marginRight="20dp"
         android:layout_centerHorizontal="true"/>
 
-    <EditText
-        android:id="@+id/edtPassword"
+    <RelativeLayout
+        android:id="@+id/relPassword"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:paddingLeft="13dp"
         android:layout_below="@id/edt_email"
         android:background="@color/input"
         android:layout_marginTop="10dp"
-        android:hint="Password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="13dp"
+            android:paddingRight="40dp"
+            android:background="@android:color/transparent"
+            android:hint="Password"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:id="@+id/hidepassword"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/ic_eye_closed" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edtPassword"
+        android:layout_below="@+id/relPassword"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/button"

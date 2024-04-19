@@ -3,9 +3,11 @@ package com.cs501finalproj.justmovein
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -24,6 +26,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var txtLogIn: TextView
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDfRef:DatabaseReference
+    private lateinit var hidePassword: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,12 +36,21 @@ class SignUpActivity : AppCompatActivity() {
         edtEmail = findViewById(R.id.edt_email)
         edtPassword = findViewById(R.id.edtPassword)
         btnSignUp = findViewById(R.id.btnSignUp)
+        hidePassword = findViewById(R.id.hidepasswordsignup)
+        var isPasswordVisible = false
+        hidePassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            updatePasswordVisibility(isPasswordVisible)
+        }
         btnSignUp. setOnClickListener{
             val name = edtName.text.toString()
             val email = edtEmail.text.toString()
             val password = edtPassword.text.toString()
-
-            signUp(name,email,password)
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                signUp(name,email, password)
+            } else {
+                Toast.makeText(this, "Email and password must not be empty", Toast.LENGTH_SHORT).show()
+            }
         }
         txtLogIn = findViewById(R.id.txtLogIn)
         txtLogIn.setOnClickListener{
@@ -51,6 +63,16 @@ class SignUpActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+    private fun updatePasswordVisibility(isVisible: Boolean) {
+        if (isVisible) {
+            edtPassword.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            hidePassword.setImageResource(R.drawable.ic_eye_open)
+        } else {
+            edtPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            hidePassword.setImageResource(R.drawable.ic_eye_closed)
+        }
+        edtPassword.setSelection(edtPassword.text.length)
     }
     private fun signUp(name:String,email:String,password:String){
         mAuth.createUserWithEmailAndPassword(email, password)
