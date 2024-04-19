@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -36,6 +37,14 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding  = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val backButton = findViewById<ImageView>(R.id.backbtn)
+        backButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            // If you want to clear all previous activities on the stack
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish() // Optional, if you want to close the current activity
+        }
         profileUserId = intent.getStringExtra("profile_user_id")!!
         currentUserId =  FirebaseAuth.getInstance().currentUser?.uid!!
 
