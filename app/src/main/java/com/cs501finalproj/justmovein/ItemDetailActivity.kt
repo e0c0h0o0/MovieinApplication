@@ -7,11 +7,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.cs501finalproj.justmovein.activities.BaseActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class ItemDetailActivity : AppCompatActivity() {
+class ItemDetailActivity :BaseActivity() {
 
     private lateinit var item: Item
 
@@ -42,7 +43,8 @@ class ItemDetailActivity : AppCompatActivity() {
 
                 updateLikeButton(fabLike)  // Update like button based on current status
             }.addOnFailureListener {
-                Toast.makeText(this, "Failed to load item details.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    "Failed to load item details.", Toast.LENGTH_SHORT).show()
             }
         }
 

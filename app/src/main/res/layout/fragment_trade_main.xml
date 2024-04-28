@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background">
+    style="@style/backgroundview">
 
     <EditText
         android:id="@+id/search_bar"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:hint="Search..."
+        android:hint="@string/search"
         android:inputType="text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
@@ -20,10 +20,7 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
-        app:tabTextColor="@color/text"
-        app:tabIndicatorColor="@color/text"
-        app:tabRippleColor="@color/search"
+
         android:layout_below="@id/search_bar">
     </com.google.android.material.tabs.TabLayout>
 
@@ -47,10 +44,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="70dp"
         android:layout_marginBottom="91dp"
-        android:backgroundTint="@color/black"
         android:src="@drawable/baseline_add_24"
-        app:rippleColor="@color/black"
-        android:outlineSpotShadowColor="@color/black"
-        android:outlineAmbientShadowColor="@color/black"
         android:tintMode="add"/>
 </RelativeLayout>
+

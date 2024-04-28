@@ -10,11 +10,12 @@ import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.cs501finalproj.justmovein.activities.BaseActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
-class ListItemActivity : AppCompatActivity() {
+class ListItemActivity : BaseActivity() {
 
     private lateinit var edtTitle: EditText
     private lateinit var edtDescription: EditText
@@ -100,7 +101,8 @@ class ListItemActivity : AppCompatActivity() {
                 pushItemToFirebase(item)
             } else {
                 if (imageUrl == null) {
-                    Toast.makeText(this, "Please wait for the image to finish uploading", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        "Please wait for the image to finish uploading", Toast.LENGTH_SHORT).show()
                 }
                 if (price == null) {
                     edtPrice.error = "Invalid price"
@@ -146,11 +148,13 @@ class ListItemActivity : AppCompatActivity() {
             databaseRef.child(itemId).setValue(item)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(this, "Item listed successfully!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,
+                            "Item listed successfully!", Toast.LENGTH_SHORT).show()
                         val  intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Toast.makeText(this, "Failed to list item.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,
+                            "Failed to list item.", Toast.LENGTH_SHORT).show()
                     }
                 }
         }

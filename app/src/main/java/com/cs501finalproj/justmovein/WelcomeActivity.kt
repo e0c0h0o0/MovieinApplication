@@ -4,8 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.cs501finalproj.justmovein.activities.BaseActivity
 
-class WelcomeActivity:AppCompatActivity() {
+class WelcomeActivity:BaseActivity() {
     private lateinit var logIn: Button
     private lateinit var signUp: Button
 

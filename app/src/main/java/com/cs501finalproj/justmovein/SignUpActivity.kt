@@ -14,11 +14,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.cs501finalproj.justmovein.activities.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : BaseActivity() {
     private lateinit var edtName: EditText
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
@@ -49,7 +50,8 @@ class SignUpActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 signUp(name,email, password)
             } else {
-                Toast.makeText(this, "Email and password must not be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.email_and_password_must_not_be_empty), Toast.LENGTH_SHORT).show()
             }
         }
         txtLogIn = findViewById(R.id.txtLogIn)
@@ -86,13 +88,14 @@ class SignUpActivity : AppCompatActivity() {
 
                 } else {
                     Log.e("SignUpError", "Sign-up failed", task.exception)
-                    Toast.makeText(baseContext, "Sign-up failed: ${task.exception?.localizedMessage}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(baseContext,
+                        getString(R.string.sign_up_failed, task.exception?.localizedMessage), Toast.LENGTH_LONG).show()
                 }
             }
     }
     @SuppressLint("SuspiciousIndentation")
     private  fun addUserToDatabase(name:String, email: String, uid:String){
-    mDfRef = FirebaseDatabase.getInstance().getReference()
+        mDfRef = FirebaseDatabase.getInstance().getReference()
         mDfRef.child("user").child(uid).setValue(User(name, email, uid))
     }
 }

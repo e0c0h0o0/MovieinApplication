@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.SENDTO" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+
+            <data android:scheme="mailto" />
+        </intent>
+    </queries>
 
     <application
         android:allowBackup="true"
@@ -15,13 +26,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JustMovein"
         tools:targetApi="31">
-        <activity android:name=".User"/>
-        <activity android:name=".SignUpActivity"/>
+        <activity
+            android:name=".activity_profile_edit"
+            android:exported="false" />
+        <activity
+            android:name=".SecurityAndPrivacyActivity"
+            android:exported="false"
+            android:label="Security and Privacy"
+            android:theme="@style/Theme.Material3.DayNight"></activity>
+        <activity
+            android:name=".activities.ProfileEditActivity"
+            android:exported="false"
+            android:label="@string/title_activity_profile_edit"
+            android:theme="@style/Theme.JustMovein" />
+        <activity android:name=".User" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".LogInActivity" />
         <activity android:name=".ListItemActivity" />
         <activity android:name=".ItemDetailActivity" />
-        <activity android:name=".WelcomeActivity"
-            android:exported="true"/>
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true" />
         <activity
             android:name=".ProfileActivity"
             android:exported="false"
@@ -29,9 +54,10 @@
             android:theme="@style/Theme.JustMovein" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

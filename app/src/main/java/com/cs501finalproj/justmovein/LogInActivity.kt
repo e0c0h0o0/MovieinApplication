@@ -12,10 +12,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.cs501finalproj.justmovein.activities.BaseActivity
 
 import com.google.firebase.auth.FirebaseAuth
 
-class    LogInActivity : AppCompatActivity() {
+class    LogInActivity : BaseActivity() {
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var btnLogIn: Button
@@ -41,7 +42,7 @@ class    LogInActivity : AppCompatActivity() {
             updatePasswordVisibility(isPasswordVisible)
         }
         txtSignUp.setOnClickListener{
-             val intent = Intent(this,SignUpActivity::class.java)
+            val intent = Intent(this,SignUpActivity::class.java)
             startActivity(intent)
         }
         btnLogIn.setOnClickListener{
@@ -50,7 +51,8 @@ class    LogInActivity : AppCompatActivity() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 login(email, password)
             } else {
-                Toast.makeText(this, "Email and password must not be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,
+                    getString(R.string.email_and_password_must_not_be_empty), Toast.LENGTH_SHORT).show()
             }
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -73,12 +75,13 @@ class    LogInActivity : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                   //code for logging in user
+                    //code for logging in user
                     val  intent = Intent(this@LogInActivity, MainActivity::class.java)
 //                    finish()
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this@LogInActivity,"User is not exist",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LogInActivity,
+                        getString(R.string.user_is_not_exist),Toast.LENGTH_LONG).show()
                 }
             }
 

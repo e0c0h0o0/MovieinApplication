@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">JustMovein</string>
+    <string name="placeholder">Lorem Ipsumとは、印刷・組版業界のダミーテキストである。ローレム・イプサムは</string>
+
+    <string name="add_up_to_5">最大5枚の写真を追加</string>
+    <string name="description_title">説明</string>
+    <string name="detail_title">詳細</string>
+    <string name="price_title">価格</string>
+    <string name="item_title_hint">タイトル</string>
+    <string name="item_description_hint">説明</string>
+
+    <string-array name="category_array">
+        <item>カテゴリを選択...</item>
+        <item>本</item>
+        <item>電子機器</item>
+        <item>衣類</item>
+    </string-array>
+
+    <string-array name="condition_array">
+        <item>状態を選択...</item>
+        <item>新品</item>
+        <item>ほぼ新品</item>
+        <item>良い</item>
+        <item>可</item>
+        <item>不良</item>
+    </string-array>
+
+
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="back" />
+    <string name="title_activity_profile_edit">ProfileEditActivity</string>
+    <string name="name">名前:</string>
+    <string name="e_mail">Eメール:</string>
+    <string name="description">説明: %1$s</string>
+    <string name="condition">状態: %1$s</string>
+    <string name="category">カテゴリ: %1$s</string>
+    <string name="loading">読み込み中...</string>
+    <string name="failed_to_load_item_details">アイテムの詳細の読み込みに失敗しました。</string>
+    <string name="please_wait_for_the_image_to_finish_uploading">画像のアップロードが完了するのをお待ちください</string>
+    <string name="invalid_price">無効な価格</string>
+    <string name="please_fill_in_all_fields">全てのフィールドに入力してください</string>
+    <string name="title_is_required">タイトルは必須です</string>
+    <string name="description_is_required">説明は必須です</string>
+    <string name="failed_to_upload_image">画像のアップロードに失敗しました。</string>
+    <string name="item_listed_successfully">アイテムが正常にリストアップされました！</string>
+    <string name="failed_to_list_item">アイテムのリストアップに失敗しました。</string>
+    <string name="email_and_password_must_not_be_empty">Eメールとパスワードは空にできません</string>
+    <string name="user_is_not_exist">ユーザーが存在しません</string>
+    <string name="select_a_language">言語を選択</string>
+    <string name="logout">ログアウト</string>
+    <string name="no_name">名前なし</string>
+    <string name="no_email">Eメールなし</string>
+    <string name="this_is_end_user_license_agreement">これはエンドユーザーライセンス契約です</string>
+    <string name="email_and_password_must_not_be_empty_1">Eメールとパスワードは空にできません</string>
+    <string name="sign_up_failed">サインアップに失敗しました: %1$s</string>
+    <string name="browse">閲覧</string>
+    <string name="liked">いいね</string>
+    <string name="database_error">データベースエラー: %1$s</string>
+    <string name="contact">連絡先</string>
+    <string name="share">シェア</string>
+    <string name="new_listing">新しいリスティング</string>
+    <string name="list">リスト</string>
+    <string name="log_in">ログイン</string>
+    <string name="log_in_1">ログイン</string>
+    <string name="new_user_sign_up">新規ユーザー？サインアップ。</string>
+    <string name="edit_profile">プロフィールを編集</string>
+    <string name="night_mode">ナイトモード</string>
+    <string name="notifications">通知</string>
+    <string name="private_account">プライベートアカウント</string>
+    <string name="security_amp_privacy"><![CDATA[セキュリティ＆プライバシー]]></string>
+    <string name="language">言語</string>
+    <string name="send_us_message">メッセージを送信</string>
+    <string name="logout_0">ログアウト</string>
+    <string name="sign_up">サインアップ</string>
+    <string name="name_0">名前</string>
+    <string name="email">Eメール</string>
+    <string name="password">パスワード</string>
+    <string name="sign_up_0">サインアップ</string>
+    <string name="already_signed_up_log_in">すでにサインアップ済み？ログイン。</string>
+    <string name="welcome_to_justmovein">JustMoveInへようこそ！</string>
+    <string name="log_in_0">ログイン</string>
+    <string name="sign_up_1">サインアップ</string>
+    <string name="search">検索...</string>
+    <string name="housing">住まい</string>
+    <string name="trading">トレーディング</string>
+    <string name="profile">プロフィール</string>
+    <string name="delete_my_account">アカウントの削除</string>
+</resources>

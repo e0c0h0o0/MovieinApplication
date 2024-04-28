@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    style="@style/backgroundview"
     tools:context=".MainActivity">
 
     <FrameLayout
@@ -18,12 +18,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemIconTint="@color/text"
-        app:itemIconSize="35dp"
-        android:background="@color/menu"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemRippleColor="@color/search"
-        android:outlineSpotShadowColor="@color/search"
+        android:layout_marginBottom="-5dp"
+        style="@style/searchview"
         android:outlineAmbientShadowColor="@color/search"
-        app:itemTextColor="@color/text" />
+        android:outlineSpotShadowColor="@color/search"
+        app:itemIconSize="35dp"
+        app:menu="@menu/bottom_nav_menu"/>
 </RelativeLayout>

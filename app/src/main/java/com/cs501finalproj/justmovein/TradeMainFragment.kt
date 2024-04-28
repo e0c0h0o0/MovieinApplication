@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cs501finalproj.justmovein.util.UiUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +36,7 @@ class TradeMainFragment : Fragment() {
 
         // Initially fetch items for the default tab
         fetchItemsFromDatabase("Browse")
+        UiUtil.setApplicationLocale(requireContext(), UiUtil.getLocaleCode(requireContext()))
     }
 
     override fun onCreateView(
@@ -117,7 +119,11 @@ class TradeMainFragment : Fragment() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(context, "Database error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.database_error) + ": " + databaseError.message,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
