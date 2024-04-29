@@ -18,10 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-5dp"
         style="@style/searchview"
-        android:outlineAmbientShadowColor="@color/search"
-        android:outlineSpotShadowColor="@color/search"
         app:itemIconSize="35dp"
         app:menu="@menu/bottom_nav_menu"/>
 </RelativeLayout>

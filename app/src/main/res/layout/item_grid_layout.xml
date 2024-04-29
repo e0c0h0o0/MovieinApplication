@@ -17,8 +17,8 @@
         android:layout_gravity="bottom|start"
         android:layout_margin="4dp"
         android:padding="6dp"
-        android:background="@color/cardview_dark_background"
-        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_corner"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
 </FrameLayout>
