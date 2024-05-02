@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cs501finalproj.justmovein.activities.BaseActivity
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 
@@ -96,7 +97,8 @@ class ListItemActivity : BaseActivity() {
                     price = price,
                     imageUrl = imageUrl,
                     active = true,
-                    timestamp = System.currentTimeMillis()
+                    timestamp = System.currentTimeMillis(),
+                    sellerId = FirebaseAuth.getInstance().currentUser?.uid // Assuming the user is logged in
                 )
                 pushItemToFirebase(item)
             } else {
