@@ -49,7 +49,7 @@ class TradeMainFragment : Fragment() {
 
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerView)
-        adapter = ItemAdapter(mutableListOf())
+        adapter = ItemAdapter(mutableListOf(), "grid")
         recyclerView.layoutManager = GridLayoutManager(context, 3)
         recyclerView.adapter = adapter
 

@@ -85,4 +85,5 @@
     <string name="trading">Trading</string>
     <string name="profile">Profile</string>
     <string name="delete_my_account">Delete my account</string>
+    <string name="your_listings">Your Listings</string>
 </resources>

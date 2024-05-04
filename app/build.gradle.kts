@@ -52,7 +52,6 @@ android {
 }
 
 dependencies {
-    implementation("com.jakewharton:process-phoenix:3.0.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -81,4 +80,5 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.jakewharton:process-phoenix:3.0.0")
 }

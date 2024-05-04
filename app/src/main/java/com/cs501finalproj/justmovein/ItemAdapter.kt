@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ItemAdapter(private var itemList: MutableList<Item>) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
+class ItemAdapter(private var itemList: MutableList<Item>, private val layoutType: String) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.item_image)
@@ -17,8 +17,12 @@ class ItemAdapter(private var itemList: MutableList<Item>) : RecyclerView.Adapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_grid_layout, parent, false)
+        val layoutId = when (layoutType) {
+            "listing_items" -> R.layout.listing_item
+            else -> R.layout.item_grid_layout
+        }
+        val view = LayoutInflater.from(parent.context).inflate(layoutId, parent, false)
+
         return ViewHolder(view)
     }
 

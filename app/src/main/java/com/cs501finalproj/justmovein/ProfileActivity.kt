@@ -52,6 +52,8 @@ class ProfileActivity : BaseActivity() {
     lateinit var profileUserModel : User
     var database = Firebase.database
     var auth = Firebase.auth
+    //add your listing btn
+
 
     lateinit var uBtnEditProfile: Button
     lateinit var uSwitchNightMode: SwitchCompat
@@ -60,7 +62,7 @@ class ProfileActivity : BaseActivity() {
     lateinit var uNotificationConfigItem: RelativeLayout
     lateinit var uLanguageSettingItem: RelativeLayout
     lateinit var uSendUsMessageItem: RelativeLayout
-    lateinit var uDeleteMyAccount: RelativeLayout
+    lateinit var yourListingsButton:RelativeLayout
 
     lateinit var languages: Array<CharSequence>
 
@@ -75,8 +77,6 @@ class ProfileActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         // Switch language
-
-
         binding  = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -84,20 +84,15 @@ class ProfileActivity : BaseActivity() {
 
         uBtnEditProfile = findViewById(R.id.u_btn_edit_profile)
         uSwitchNightMode = findViewById(R.id.u_switch_night_mode)
-        //uSwitchPrivateAccount = findViewById(R.id.u_switch_private_account)
         uItemSecurityPrivacy = findViewById(R.id.u_item_security_privacy)
         uNotificationConfigItem = findViewById<RelativeLayout>(R.id.u_notification_config)
         uLanguageSettingItem = findViewById<RelativeLayout>(R.id.u_language_setting)
         uSendUsMessageItem = findViewById<RelativeLayout>(R.id.u_send_us_message)
-
-        uDeleteMyAccount = findViewById(R.id.u_delete_my_account)
-
-        uDeleteMyAccount.setOnClickListener {
-            auth.currentUser!!.delete()
-                .addOnFailureListener{  }
-                .addOnSuccessListener {
-                    Toast.makeText(this@ProfileActivity, "Your account has been deleted", Toast.LENGTH_SHORT).show()
-                }
+        //add your listing function
+        yourListingsButton = findViewById<RelativeLayout>(R.id.u_your_listings)
+        yourListingsButton.setOnClickListener {
+            val intent = Intent(this, YourListingsActivity::class.java)
+            startActivity(intent)
         }
 
 
