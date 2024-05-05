@@ -29,7 +29,7 @@ class ItemAdapter(private var itemList: MutableList<Item>, private val layoutTyp
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = itemList[position]
         Glide.with(holder.imageView.context)
-            .load(item.imageUrl)
+            .load(item.imageUrls?.get(0))
             .into(holder.imageView)
         holder.priceView.text = String.format("$%.2f", item.price ?: 0.00) // Handle possible null price
 

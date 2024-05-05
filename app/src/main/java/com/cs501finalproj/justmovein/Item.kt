@@ -7,7 +7,7 @@ data class Item(
     val category: String? = null,
     val condition: String? = null,
     val price: Double? = null,
-    val imageUrl: String? = null,
+    val imageUrls: List<String>? = null,
     var active: Boolean? = true,
     var likedBy: MutableMap<String, Boolean>? = mutableMapOf(),
     val timestamp: Long? = null,

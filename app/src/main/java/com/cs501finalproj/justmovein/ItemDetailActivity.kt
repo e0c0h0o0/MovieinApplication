@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.cs501finalproj.justmovein.activities.BaseActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,6 +21,7 @@ class ItemDetailActivity :BaseActivity() {
 
     private lateinit var item: Item
     private lateinit var databaseReference: DatabaseReference
+    val Int.dp: Int get() = (this * resources.displayMetrics.density + 0.5f).toInt()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,6 @@ class ItemDetailActivity :BaseActivity() {
 
         val titleView: TextView = findViewById(R.id.item_detail_title)
         val priceView: TextView = findViewById(R.id.item_detail_price)
-        val imageView: ImageView = findViewById(R.id.item_detail_image)
         val descriptionView: TextView = findViewById(R.id.item_detail_description)
         val conditionView: TextView = findViewById(R.id.item_detail_condition)
         val categoryView: TextView = findViewById(R.id.item_detail_category)
@@ -46,7 +48,7 @@ class ItemDetailActivity :BaseActivity() {
 
         databaseReference.get().addOnSuccessListener { dataSnapshot ->
             item = dataSnapshot.getValue(Item::class.java) ?: return@addOnSuccessListener
-            updateUI(item, titleView, priceView, imageView, descriptionView, conditionView, categoryView, fabLike)
+            updateUI(item, titleView, priceView, descriptionView, conditionView, categoryView, fabLike)
             configureOptionsMenu(moreOptionsButton, item)  // Configure the options menu based on ownership
         }.addOnFailureListener {
             Toast.makeText(this, "Failed to load item details.", Toast.LENGTH_SHORT).show()
@@ -66,7 +68,7 @@ class ItemDetailActivity :BaseActivity() {
         }
     }
 
-    private fun updateUI(item: Item, titleView: TextView, priceView: TextView, imageView: ImageView,
+    private fun updateUI(item: Item, titleView: TextView, priceView: TextView,
                          descriptionView: TextView, conditionView: TextView, categoryView: TextView,
                          fabLike: FloatingActionButton) {
         titleView.text = item.title
@@ -74,9 +76,14 @@ class ItemDetailActivity :BaseActivity() {
         descriptionView.text = "Description: ${item.description}"
         conditionView.text = "Condition: ${item.condition}"
         categoryView.text = "Category: ${item.category}"
-        Glide.with(this).load(item.imageUrl).into(imageView)
+
+        // Update for multiple images
+        val viewPager = findViewById<ViewPager2>(R.id.image_viewpager)
+        viewPager.adapter = ImageAdapter(this, item.imageUrls ?: emptyList())
+
         updateLikeButton(fabLike)
     }
+
 
     private fun updateLikeButton(fabLike: FloatingActionButton) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return

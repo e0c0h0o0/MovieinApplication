@@ -81,4 +81,6 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.jakewharton:process-phoenix:3.0.0")
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+
 }
