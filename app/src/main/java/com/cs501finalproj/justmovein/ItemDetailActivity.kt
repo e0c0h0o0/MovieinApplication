@@ -81,7 +81,7 @@ class ItemDetailActivity :BaseActivity() {
     private fun updateLikeButton(fabLike: FloatingActionButton) {
         val userId = FirebaseAuth.getInstance().currentUser?.uid ?: return
         val isLiked = item.likedBy?.containsKey(userId) ?: false
-        fabLike.setImageResource(if (isLiked) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24)
+        fabLike.setImageResource(if (isLiked) R.drawable.ic_favorite_24 else R.drawable.ic_favorite_border_24)
     }
 
     private fun toggleLikeStatus(fabLike: FloatingActionButton) {

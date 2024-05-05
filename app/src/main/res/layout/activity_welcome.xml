@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
         android:layout_marginTop="-49dp"
-        android:src="@drawable/circular_1"
+        android:src="@drawable/img_circular_1"
         app:tint="#DED8E1" />
 
     <ImageView
@@ -27,14 +27,14 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="-6dp"
         android:layout_marginTop="-5dp"
-        android:src="@drawable/circular_2"
+        android:src="@drawable/img_circular_2"
         app:tint="#DED8E1"/>
 
     <ImageView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:src="@drawable/welcome"
+        android:src="@drawable/img_welcome"
         android:layout_below="@id/cicular_2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="7dp" />

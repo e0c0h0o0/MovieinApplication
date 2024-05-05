@@ -17,7 +17,7 @@
         android:layout_gravity="bottom|start"
         android:layout_margin="4dp"
         android:padding="6dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/style_rounded_corner"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />

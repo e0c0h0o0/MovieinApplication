@@ -1,12 +1,10 @@
 package com.cs501finalproj.justmovein
 
-import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -325,7 +323,7 @@ class ProfileActivity : BaseActivity() {
     fun setUI(){
         profileUserModel.apply {
             Glide.with(binding.profilePic).load(profilePic)
-                .load(profilePic ?: R.drawable.icon_account_circle) // Use default if null
+                .load(profilePic ?: R.drawable.ic_account_circle) // Use default if null
                 .circleCrop()
                 .into(binding.profilePic)
             binding.profileUsername.text = name ?: getString(R.string.no_name)

@@ -44,6 +44,7 @@
     <string name="failed_to_upload_image">Failed to upload image.</string>
     <string name="item_listed_successfully">Item listed successfully!</string>
     <string name="failed_to_list_item">Failed to list item.</string>
+    <string name="no_result">Oops, no matching result.</string>
     <string name="email_and_password_must_not_be_empty">Email and password must not be empty</string>
     <string name="user_is_not_exist">User is not exist</string>
     <string name="select_a_language">Select a Language</string>

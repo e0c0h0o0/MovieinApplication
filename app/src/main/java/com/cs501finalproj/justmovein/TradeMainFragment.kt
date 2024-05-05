@@ -2,11 +2,15 @@ package com.cs501finalproj.justmovein
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,6 +34,8 @@ class TradeMainFragment : Fragment() {
     private var itemList: List<Item> = listOf()
     private lateinit var databaseReference: DatabaseReference
     private lateinit var adapter: ItemAdapter
+    private lateinit var imgNoResults: ImageView
+    private lateinit var txtNoResults: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -86,6 +92,20 @@ class TradeMainFragment : Fragment() {
         // Manually trigger the first tab selection
         tabLayout.getTabAt(0)?.select()
 
+        imgNoResults = view.findViewById(R.id.imgNoResults)
+        txtNoResults = view.findViewById(R.id.txtNoResults)
+
+        searchBar.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                filterItems(s.toString())
+            }
+        })
+
+
         return view
     }
 
@@ -126,5 +146,24 @@ class TradeMainFragment : Fragment() {
                 ).show()
             }
         })
+    }
+
+    private fun filterItems(query: String) {
+        val filteredList = if (query.isNotEmpty()) {
+            itemList.filter { it.title?.contains(query, ignoreCase = true) == true }.toMutableList()
+        } else {
+            itemList
+        }
+
+        adapter.updateItemList(filteredList)
+        if (filteredList.isEmpty()) {
+            recyclerView.visibility = View.GONE
+            imgNoResults.visibility = View.VISIBLE
+            txtNoResults.visibility = View.VISIBLE
+        } else {
+            recyclerView.visibility = View.VISIBLE
+            imgNoResults.visibility = View.GONE
+            txtNoResults.visibility = View.GONE
+        }
     }
 }
