@@ -290,8 +290,9 @@ class ProfileActivity : BaseActivity() {
                     val name = dataSnapshot.child("name").getValue(String::class.java)
                     val email = dataSnapshot.child("email").getValue(String::class.java)
                     val profilePic = dataSnapshot.child("profilePic").getValue(String::class.java)
+                    val zipcode = dataSnapshot.child("zipcode").getValue(String::class.java)
                     if (name != null && email != null) {
-                        profileUserModel = User(name, email, profileUserId,profilePic ?: "")
+                        profileUserModel = User(name, email, profileUserId,profilePic ?: "", zipcode ?:"")
                         setUI()
                     }
                     var isPrivateAccount = false

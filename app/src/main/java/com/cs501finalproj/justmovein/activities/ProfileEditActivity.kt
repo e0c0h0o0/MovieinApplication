@@ -23,9 +23,11 @@ class ProfileEditActivity : BaseActivity() {
     lateinit var userId: String
     lateinit var origName: String
     lateinit var origEmail: String
+    private var origZipCode: String? = null
 
     lateinit var nameEdit: EditText
     lateinit var emailEdit: EditText
+    lateinit var zipCodeEdit : EditText
     lateinit var saveButton: Button
 
     // var userRef
@@ -42,6 +44,7 @@ class ProfileEditActivity : BaseActivity() {
 
         nameEdit = findViewById(R.id.u_name_edit)
         emailEdit = findViewById(R.id.u_email_edit)
+        zipCodeEdit = findViewById(R.id.u_zipcode_edit)
         saveButton = findViewById(R.id.u_save_button)
 
 
@@ -53,9 +56,11 @@ class ProfileEditActivity : BaseActivity() {
                 if(snapshot.exists()) {
                     origName = snapshot.child("name").getValue(String::class.java)!!
                     origEmail = snapshot.child("email").getValue(String::class.java)!!
+                    origZipCode = snapshot.child("zipcode").getValue(String::class.java) ?: ""
                     this@ProfileEditActivity.runOnUiThread {
                         nameEdit.setText(origName)
                         emailEdit.setText(origEmail)
+                        zipCodeEdit.setText(origZipCode)
                     }
                 }
             }
@@ -67,12 +72,16 @@ class ProfileEditActivity : BaseActivity() {
         saveButton.setOnClickListener {
             val newName = nameEdit.text.toString()
             val newEmail = emailEdit.text.toString()
+            val newZipCode = zipCodeEdit.text.toString()
 
             if(newName != origName) {
                 databaseRef.child("name").setValue(newName)
             }
             if(newEmail != origEmail) {
-                databaseRef.child("email").setValue(newName)
+                databaseRef.child("email").setValue(newEmail)
+            }
+            if(newZipCode != origZipCode) {
+                databaseRef.child("zipcode").setValue(newZipCode)
             }
 
             Toast.makeText(this@ProfileEditActivity, "Saved", Toast.LENGTH_SHORT).show()

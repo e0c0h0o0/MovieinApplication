@@ -75,6 +75,7 @@
     <string name="sign_up">Sign up</string>
     <string name="name_0">Name</string>
     <string name="email">Email</string>
+    <string name="zipcode">ZIP Code:</string>
     <string name="password">Password</string>
     <string name="sign_up_0">Sign Up</string>
     <string name="already_signed_up_log_in">Already signed up? Log in.</string>
