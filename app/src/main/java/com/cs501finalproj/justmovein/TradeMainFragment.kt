@@ -26,75 +26,46 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class TradeMainFragment : Fragment() {
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var fabAddItem: FloatingActionButton
     private lateinit var searchBar: EditText
     private lateinit var tabLayout: TabLayout
-    private var itemList: List<Item> = listOf()
+    private var itemList: MutableList<Item> = mutableListOf()  // Use MutableList for easy updates
     private lateinit var databaseReference: DatabaseReference
     private lateinit var adapter: ItemAdapter
     private lateinit var imgNoResults: ImageView
     private lateinit var txtNoResults: TextView
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Initially fetch items for the default tab
-        fetchItemsFromDatabase("Browse")
-        UiUtil.setApplicationLocale(requireContext(), UiUtil.getLocaleCode(requireContext()))
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_trade_main, container, false)
+        setupViews(view)
+        initializeRecyclerView()
+        setupSearchBar()
+        setupFab()
+        setupTabLayout()
+        return view
+    }
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Items")
-
-        // Initialize RecyclerView
+    private fun setupViews(view: View) {
         recyclerView = view.findViewById(R.id.recyclerView)
+        fabAddItem = view.findViewById(R.id.fab_add_item)
+        searchBar = view.findViewById(R.id.search_bar)
+        tabLayout = view.findViewById(R.id.tabs)
+        imgNoResults = view.findViewById(R.id.imgNoResults)
+        txtNoResults = view.findViewById(R.id.txtNoResults)
+        databaseReference = FirebaseDatabase.getInstance().getReference("Items")
+    }
+
+    private fun initializeRecyclerView() {
         adapter = ItemAdapter(mutableListOf(), "grid")
         recyclerView.layoutManager = GridLayoutManager(context, 3)
         recyclerView.adapter = adapter
+    }
 
-        fabAddItem = view.findViewById(R.id.fab_add_item)
-        fabAddItem.setOnClickListener {
-            val intent = Intent(activity, ListItemActivity::class.java)
-            startActivity(intent)
-        }
-
-        searchBar = view.findViewById(R.id.search_bar)
-
-        tabLayout = view.findViewById(R.id.tabs)
-        tabLayout.apply {
-            addTab(this.newTab().setText("Browse"))
-            addTab(this.newTab().setText("Liked"))
-            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    when (tab?.position) {
-                        0 -> fetchItemsFromDatabase("Browse")
-                        1 -> fetchItemsFromDatabase("Liked")
-                    }
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {
-                    // Optionally handle tab unselected
-                }
-
-                override fun onTabReselected(tab: TabLayout.Tab?) {
-                    // Optionally handle tab reselection
-                }
-            })
-        }
-
-        // Manually trigger the first tab selection
-        tabLayout.getTabAt(0)?.select()
-
-        imgNoResults = view.findViewById(R.id.imgNoResults)
-        txtNoResults = view.findViewById(R.id.txtNoResults)
-
+    private fun setupSearchBar() {
         searchBar.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -104,59 +75,74 @@ class TradeMainFragment : Fragment() {
                 filterItems(s.toString())
             }
         })
+    }
 
+    private fun setupFab() {
+        fabAddItem.setOnClickListener {
+            val intent = Intent(activity, ListItemActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
-        return view
+    private fun setupTabLayout() {
+        tabLayout.apply {
+            addTab(this.newTab().setText("Browse"))
+            addTab(this.newTab().setText("Liked"))
+            addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    fetchItemsFromDatabase(tab?.text.toString())
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                    fetchItemsFromDatabase(tab?.text.toString())
+                }
+            })
+        }
+        tabLayout.getTabAt(0)?.select()
     }
 
     private fun fetchItemsFromDatabase(tab: String) {
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId == null) {
-            Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
-            return
+        val query = when (tab) {
+            "Liked" -> databaseReference.orderByChild("likedBy/${FirebaseAuth.getInstance().currentUser?.uid}").equalTo(true)
+            else -> databaseReference.orderByChild("active").equalTo(true)
         }
 
-        val query = databaseReference.orderByChild("active").equalTo(true)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val fetchedItems = mutableListOf<Item>()
+                itemList.clear()
                 snapshot.children.forEach { childSnapshot ->
-                    val item = childSnapshot.getValue(Item::class.java)
-                    if (item != null && item.active == true) {
-                        if (tab == "Liked") {
-                            // Log for debugging
-                            Log.d("TradeMainFragment", "Item ${item.id} likedBy: ${item.likedBy}")
-                            if (item.likedBy?.containsKey(userId) == true) {
-                                fetchedItems.add(item)
-                            }
-                        } else if (tab == "Browse") {
-                            fetchedItems.add(item)
-                        }
+                    childSnapshot.getValue(Item::class.java)?.let {
+                        if (it.active == true) itemList.add(it)
                     }
                 }
-                Log.d("TradeMainFragment", "Fetched ${fetchedItems.size} items for tab $tab")
-                adapter.updateItemList(fetchedItems)
+                adapter.updateItemList(itemList)
+                filterItems(searchBar.text.toString())  // Refilter items every time the data changes
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(
-                    context,
-                    getString(R.string.database_error) + ": " + databaseError.message,
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(context, "Database error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun filterItems(query: String) {
         val filteredList = if (query.isNotEmpty()) {
-            itemList.filter { it.title?.contains(query, ignoreCase = true) == true }.toMutableList()
+            itemList.filter {
+                it.title?.contains(query, ignoreCase = true) == true ||
+                        it.description?.contains(query, ignoreCase = true) == true
+            }.toMutableList()
         } else {
             itemList
         }
 
         adapter.updateItemList(filteredList)
-        if (filteredList.isEmpty()) {
+        toggleNoResultsView(filteredList.isEmpty())
+    }
+
+    private fun toggleNoResultsView(isEmpty: Boolean) {
+        if (isEmpty) {
             recyclerView.visibility = View.GONE
             imgNoResults.visibility = View.VISIBLE
             txtNoResults.visibility = View.VISIBLE
