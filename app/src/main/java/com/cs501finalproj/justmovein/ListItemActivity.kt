@@ -65,8 +65,7 @@ class ListItemActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         back.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
 
         imgCameraClickArea.setOnClickListener {
@@ -164,7 +163,7 @@ class ListItemActivity : AppCompatActivity() {
             category = category,
             condition = condition,
             price = price,
-            imageUrls = imageUrls, // This should be a list of strings.
+            imageUrls = imageUrls,
             active = true,
             timestamp = System.currentTimeMillis(),
             sellerId = FirebaseAuth.getInstance().currentUser?.uid

@@ -2,15 +2,15 @@ package com.cs501finalproj.justmovein
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
 import com.cs501finalproj.justmovein.activities.BaseActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -36,7 +36,6 @@ class ItemDetailActivity :BaseActivity() {
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Items").child(itemId)
-
         val titleView: TextView = findViewById(R.id.item_detail_title)
         val priceView: TextView = findViewById(R.id.item_detail_price)
         val descriptionView: TextView = findViewById(R.id.item_detail_description)
@@ -44,16 +43,57 @@ class ItemDetailActivity :BaseActivity() {
         val categoryView: TextView = findViewById(R.id.item_detail_category)
         val fabLike: FloatingActionButton = findViewById(R.id.fab_like)
         val moreOptionsButton: ImageButton = findViewById(R.id.more_options_button)
-        val exitButton : ImageView = findViewById(R.id.cross)
+        val exitButton: ImageView = findViewById(R.id.cross)
+        val contactBtn: Button = findViewById(R.id.btnContact)
 
         databaseReference.get().addOnSuccessListener { dataSnapshot ->
             item = dataSnapshot.getValue(Item::class.java) ?: return@addOnSuccessListener
             updateUI(item, titleView, priceView, descriptionView, conditionView, categoryView, fabLike)
-            configureOptionsMenu(moreOptionsButton, item)  // Configure the options menu based on ownership
+            configureOptionsMenu(moreOptionsButton, item)
+
+            // Initialize contact button after fetching item and seller details
+            setupContactButton(item.sellerId, item.title)
         }.addOnFailureListener {
             Toast.makeText(this, "Failed to load item details.", Toast.LENGTH_SHORT).show()
         }
 
+        setupListeners(fabLike, moreOptionsButton, exitButton)
+    }
+
+    private fun setupContactButton(sellerId: String?, itemTitle: String?) {
+        val contactBtn: Button = findViewById(R.id.btnContact)
+        contactBtn.setOnClickListener {
+            if (sellerId != null) {
+                Log.d("ItemDetailActivity", "Fetching seller details for ID: $sellerId")
+                FirebaseDatabase.getInstance().getReference("user").child(sellerId)
+                    .get().addOnSuccessListener { dataSnapshot ->
+                        val seller = dataSnapshot.getValue(User::class.java)
+                        if (seller != null) {
+                            Log.d("ItemDetailActivity", "Seller found: ${seller.name}")
+                            val intent = Intent(this@ItemDetailActivity, ContactSellerActivity::class.java).apply {
+                                putExtra("SELLER_NAME", seller.name)
+                                putExtra("SELLER_ZIPCODE", seller.zipcode)
+                                putExtra("ITEM_NAME", itemTitle)
+                                putExtra("SELLER_ICON", seller.profilePic)
+                                putExtra("SELLER_EMAIL", seller.email)
+                            }
+                            startActivity(intent)
+                        } else {
+                            Log.d("ItemDetailActivity", "No data for seller found in database.")
+                            Toast.makeText(this@ItemDetailActivity, "Seller details not found.", Toast.LENGTH_SHORT).show()
+                        }
+                    }.addOnFailureListener {
+                        Log.d("ItemDetailActivity", "Failed to fetch seller details: ${it.message}")
+                        Toast.makeText(this@ItemDetailActivity, "Failed to load seller details.", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                Toast.makeText(this@ItemDetailActivity, "Seller ID is missing.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
+    private fun setupListeners(fabLike: FloatingActionButton, moreOptionsButton: ImageButton, exitButton: ImageView) {
         fabLike.setOnClickListener {
             toggleLikeStatus(fabLike)
         }
@@ -63,8 +103,7 @@ class ItemDetailActivity :BaseActivity() {
         }
 
         exitButton.setOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
     }
 
@@ -127,7 +166,7 @@ class ItemDetailActivity :BaseActivity() {
         databaseReference.setValue(item)
             .addOnSuccessListener {
                 Toast.makeText(this, if (isActive) "Item activated" else "Item deactivated", Toast.LENGTH_SHORT).show()
-                finish()  // Optionally finish the activity or refresh the UI
+                finish()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Failed to update item status.", Toast.LENGTH_SHORT).show()

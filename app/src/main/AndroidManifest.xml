@@ -18,6 +18,7 @@
 
     <application
         android:allowBackup="true"
+        android:enableOnBackInvokedCallback="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -41,6 +42,7 @@
         <activity android:name=".LogInActivity" />
         <activity android:name=".ListItemActivity" />
         <activity android:name=".ItemDetailActivity" />
+        <activity android:name=".ContactSellerActivity" />
         <activity android:name=".YourListingsActivity" />
         <activity
             android:name=".WelcomeActivity"

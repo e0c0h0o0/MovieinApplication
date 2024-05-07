@@ -54,8 +54,8 @@ class ProfileEditActivity : BaseActivity() {
         databaseRef.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()) {
-                    origName = snapshot.child("name").getValue(String::class.java)!!
-                    origEmail = snapshot.child("email").getValue(String::class.java)!!
+                    origName = snapshot.child("name").getValue(String::class.java)?: ""
+                    origEmail = snapshot.child("email").getValue(String::class.java)?: ""
                     origZipCode = snapshot.child("zipcode").getValue(String::class.java) ?: ""
                     this@ProfileEditActivity.runOnUiThread {
                         nameEdit.setText(origName)
