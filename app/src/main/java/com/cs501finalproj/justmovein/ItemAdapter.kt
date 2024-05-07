@@ -12,8 +12,10 @@ import com.bumptech.glide.Glide
 class ItemAdapter(private var itemList: MutableList<Item>, private val layoutType: String) : RecyclerView.Adapter<ItemAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.item_image)
-        val priceView: TextView = view.findViewById(R.id.item_price)
+        val imageView: ImageView = view.findViewById(R.id.item_image) ?: view.findViewById(R.id.item_lisiting_image)
+        val priceView: TextView = view.findViewById(R.id.item_price) ?: view.findViewById(R.id.item_lisiting_price)
+        val titleView: TextView? = view.findViewById(R.id.item_lisiting_title)
+        val descriptionView: TextView? = view.findViewById(R.id.item_listing_description)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,6 +34,8 @@ class ItemAdapter(private var itemList: MutableList<Item>, private val layoutTyp
             .load(item.imageUrls?.get(0))
             .into(holder.imageView)
         holder.priceView.text = String.format("$%.2f", item.price ?: 0.00) // Handle possible null price
+        holder.titleView?.text = item.title ?: "No Title"
+        holder.descriptionView?.text = item.description ?: "No Description"
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
