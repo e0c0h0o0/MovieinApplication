@@ -1,6 +1,7 @@
 package com.cs501finalproj.justmovein
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -44,7 +45,7 @@ class ItemDetailActivity :BaseActivity() {
         val fabLike: FloatingActionButton = findViewById(R.id.fab_like)
         val moreOptionsButton: ImageButton = findViewById(R.id.more_options_button)
         val exitButton: ImageView = findViewById(R.id.cross)
-        val contactBtn: Button = findViewById(R.id.btnContact)
+        val shareBtn: Button = findViewById(R.id.btnShare)
 
         databaseReference.get().addOnSuccessListener { dataSnapshot ->
             item = dataSnapshot.getValue(Item::class.java) ?: return@addOnSuccessListener
@@ -57,7 +58,7 @@ class ItemDetailActivity :BaseActivity() {
             Toast.makeText(this, "Failed to load item details.", Toast.LENGTH_SHORT).show()
         }
 
-        setupListeners(fabLike, moreOptionsButton, exitButton)
+        setupListeners(fabLike, moreOptionsButton, exitButton, shareBtn)
     }
 
     private fun setupContactButton(sellerId: String?, itemTitle: String?) {
@@ -93,7 +94,7 @@ class ItemDetailActivity :BaseActivity() {
     }
 
 
-    private fun setupListeners(fabLike: FloatingActionButton, moreOptionsButton: ImageButton, exitButton: ImageView) {
+    private fun setupListeners(fabLike: FloatingActionButton, moreOptionsButton: ImageButton, exitButton: ImageView, shareBtn : Button) {
         fabLike.setOnClickListener {
             toggleLikeStatus(fabLike)
         }
@@ -104,6 +105,22 @@ class ItemDetailActivity :BaseActivity() {
 
         exitButton.setOnClickListener{
             onBackPressed()
+        }
+
+        shareBtn.setOnClickListener {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "image/*"
+
+            // Add item details to the shared text
+            val sharedText = "Check out on JustMoveIn!\n\nItem: ${item.title}\nPrice: ${item.price}\nDescription: ${item.description}"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, sharedText)
+
+            // Add item image to the shared intent
+            val imageUri = Uri.parse(item.imageUrls.toString())
+            shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+            startActivity(Intent.createChooser(shareIntent, "Share via"))
         }
     }
 
