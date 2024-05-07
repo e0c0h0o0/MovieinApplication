@@ -5,12 +5,12 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
     <style name="textview">
-        <item name="android:textColor">@color/textnight</item>
+        <item name="android:textColor">@color/text</item>
     </style>
     <style name="backgroundview">
-        <item name="android:background">@color/backgroundnight</item>
+        <item name="android:background">@color/background</item>
     </style>
     <style name="searchview">
-        <item name="background">@color/searchnight</item>
+        <item name="background">@color/search</item>
     </style>
 </resources>
