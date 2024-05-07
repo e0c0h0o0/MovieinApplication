@@ -8,8 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -35,6 +38,7 @@ class TradeMainFragment : Fragment() {
     private lateinit var adapter: ItemAdapter
     private lateinit var imgNoResults: ImageView
     private lateinit var txtNoResults: TextView
+    private lateinit var categorySpinner: Spinner
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +61,27 @@ class TradeMainFragment : Fragment() {
         imgNoResults = view.findViewById(R.id.imgNoResults)
         txtNoResults = view.findViewById(R.id.txtNoResults)
         databaseReference = FirebaseDatabase.getInstance().getReference("Items")
+        categorySpinner = view.findViewById(R.id.category_spinner)
+
+        val categoryArray = resources.getStringArray(R.array.category_array)
+        val categoryAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categoryArray)
+
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        categorySpinner.adapter = categoryAdapter
+        categorySpinner.prompt = getString(R.string.category_prompt)
+
+        categorySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedCategory = parent?.getItemAtPosition(position).toString()
+                filterItemsByCategory(selectedCategory)
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                adapter.updateItemList(itemList)
+                toggleNoResultsView(itemList.isEmpty())
+            }
+        }
     }
 
     private fun initializeRecyclerView() {
@@ -130,14 +155,24 @@ class TradeMainFragment : Fragment() {
     private fun filterItems(query: String) {
         val filteredList = if (query.isNotEmpty()) {
             itemList.filter {
-                it.title?.contains(query, ignoreCase = true) == true ||
-                        it.description?.contains(query, ignoreCase = true) == true
+                it.title?.contains(query, ignoreCase = true) == true
             }.toMutableList()
         } else {
             itemList
         }
 
         adapter.updateItemList(filteredList)
+        toggleNoResultsView(filteredList.isEmpty())
+    }
+
+    private fun filterItemsByCategory(category: String) {
+        val filteredList = if (category != getString(R.string.category_prompt)) {
+            itemList.filter { it.category == category }.toMutableList()
+        } else {
+            itemList
+        }
+        adapter.updateItemList(filteredList)
+        adapter.notifyDataSetChanged() // Notify adapter of data change
         toggleNoResultsView(filteredList.isEmpty())
     }
 

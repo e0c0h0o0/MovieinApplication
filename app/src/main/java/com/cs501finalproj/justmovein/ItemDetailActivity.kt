@@ -129,9 +129,9 @@ class ItemDetailActivity :BaseActivity() {
                          fabLike: FloatingActionButton) {
         titleView.text = item.title
         priceView.text = String.format("$%.2f", item.price ?: 0.0)
-        descriptionView.text = "Description: ${item.description}"
-        conditionView.text = "Condition: ${item.condition}"
-        categoryView.text = "Category: ${item.category}"
+        descriptionView.text = "Description:\n${item.description}\n"
+        conditionView.text = "Condition:\n${item.condition}\n"
+        categoryView.text = "Category:\n${item.category}"
 
         // Update for multiple images
         val viewPager = findViewById<ViewPager2>(R.id.image_viewpager)
