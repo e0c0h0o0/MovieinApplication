@@ -10,7 +10,7 @@ second-hand purchase for both buying and selling. Make it easy for users to move
 </p>
 
 ## Notes
-1. For the detailed documentation, please refer to the [Docs](Docs) folder.
+1. For the detailed documentation, please refer to the [CS501_Project_Document.pdf](Docs/CS501_Project_Document.pdf) under the [Docs](Docs) folder.
 2. For Generative AI usage, please refer to the [References](Docs/References) folder.
 
 ## Compile Instructions
