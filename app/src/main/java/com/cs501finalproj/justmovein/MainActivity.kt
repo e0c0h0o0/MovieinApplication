@@ -45,6 +45,10 @@ class MainActivity : BaseActivity() {
         try {
             bottomNav.setOnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
+                    R.id.navigation_housing -> {
+                        val fragment = HousingMainFragment()
+                        switchFragment(fragment)
+                    }
                     R.id.navigation_trading -> {
                         val fragment = TradeMainFragment()
                         switchFragment(fragment)

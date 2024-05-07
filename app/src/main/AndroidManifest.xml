@@ -44,6 +44,8 @@
         <activity android:name=".ItemDetailActivity" />
         <activity android:name=".ContactSellerActivity" />
         <activity android:name=".YourListingsActivity" />
+        <activity android:name=".ListHousingActivity" />
+        <activity android:name=".HousingDetailActivity" />
         <activity
             android:name=".WelcomeActivity"
             android:exported="true" />

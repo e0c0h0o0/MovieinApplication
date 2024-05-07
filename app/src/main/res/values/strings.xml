@@ -30,6 +30,16 @@
         <item>Poor</item>
     </string-array>
 
+    <string-array name="category_array_house">
+        <item>Select category...</item>
+        <item>Studio</item>
+        <item>1 Bed</item>
+        <item>2 Beds</item>
+        <item>Other</item>
+        <item>Outdoor</item>
+
+    </string-array>
+
 
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="back" />
