@@ -31,7 +31,7 @@ Our application supports comprehensive user account management features. Users c
 
 To start using the Just Move In application, follow these steps:
 
-1. **Install the App:** Download the app from the Play Store or App Store.
+1. **Install the App:** Download the app from VCS.
 2. **Create an Account:** Sign up with your email or social media accounts to create a new user account.
 3. **Browse Listings:** Explore the listings for houses and items, or use the search functionality to find specific items or properties.
 4. **Post Listings:** Use the 'Add' button to post new listings for items or houses you want to rent, sell, or trade.
