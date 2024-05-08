@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">JustMovein</string>
     <string name="placeholder">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been </string>
-
+    <string name="welcome_text">We are aiming to streamline the user experience in the realms of both rental and second-hand transactions. </string>
     <string name="add_up_to_5">Add up to 5 photos</string>
     <string name="description_title">Description</string>
     <string name="detail_title">Details</string>
@@ -36,7 +36,6 @@
         <item>1 Bed</item>
         <item>2 Beds</item>
         <item>Other</item>
-        <item>Outdoor</item>
 
     </string-array>
 

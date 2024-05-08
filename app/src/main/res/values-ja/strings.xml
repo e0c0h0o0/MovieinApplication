@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">JustMovein</string>
     <string name="placeholder">Lorem Ipsumとは、印刷・組版業界のダミーテキストである。ローレム・イプサムは</string>
-
+    <string name="welcome_text">私たちは、レンタルと中古取引の両方の領域でのユーザーエクスペリエンスの効率化を目指しています</string>
     <string name="add_up_to_5">最大5枚の写真を追加</string>
     <string name="description_title">説明</string>
     <string name="detail_title">詳細</string>
@@ -85,4 +85,10 @@
     <string name="trading">トレーディング</string>
     <string name="profile">プロフィール</string>
     <string name="delete_my_account">アカウントの削除</string>
+    <string name="your_listings">あなたのリスト</string>
+    <string name="contact_seller">販売者に連絡する</string>
+    <string name="category_prompt">カテゴリを選んでください</string>
+    <string name="no_result">おっと、一致する結果はありませんでした。</string>
+    <string name="zipcode">郵便番号：</string>
+
 </resources>
